@@ -40,7 +40,9 @@ Opçôes de pacote e opção de se tornar membro
 <img width="1321" height="743" alt="3" src="https://github.com/user-attachments/assets/7509b2ee-31c8-4c94-b6b1-aa9526a86e42" />
 
 Opções de Login de Cliente, Úsuario ou Colaborador
-<img width="600" height="827" alt="4" src="https://github.com/user-attachments/assets/99ac8b3e-5d10-4a7d-a8fc-ed684e35f42a" />
+<img width="1120" height="818" alt="6" src="https://github.com/user-attachments/assets/8358d412-11fe-4bb0-9278-9bc25f349ff7" />
+
+
 
 Busca por tipos de experiências, como restaurantes ou pontos turísticos
 <img width="1351" height="751" alt="5" src="https://github.com/user-attachments/assets/8c4c3125-85d2-407b-8f28-ecb27d8d3987" />
