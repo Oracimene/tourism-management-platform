@@ -1,0 +1,66 @@
+-- ================================================
+-- BANCO DE DADOS: turismo_db
+-- FINALIDADE: Gerenciar informações de Restaurantes e Hotéis
+-- AUTOR: ChatGPT
+-- ================================================
+
+-- Criação do schema (opcional)
+CREATE SCHEMA IF NOT EXISTS turismo;
+SET search_path TO turismo;
+
+-- ================================================
+-- TABELA: localizacao
+-- Armazena coordenadas e endereços
+-- ================================================
+CREATE TABLE localizacao (
+    id_localizacao SERIAL PRIMARY KEY,
+    endereco VARCHAR(255) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(100),
+    pais VARCHAR(100) DEFAULT 'Brasil',
+    latitude DECIMAL(9,6),
+    longitude DECIMAL(9,6)
+);
+
+-- ================================================
+-- TABELA: colaborador
+-- Armazena informações de colaboradores
+-- ================================================
+CREATE TABLE colaborador (
+    id_colaborador SERIAL PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    cargo VARCHAR(100),
+    telefone VARCHAR(20),
+    email VARCHAR(150) UNIQUE
+);
+
+-- ================================================
+-- TABELA: estabelecimento
+-- Entidade genérica para Restaurantes e Hotéis
+-- ================================================
+CREATE TABLE estabelecimento (
+    id_estabelecimento SERIAL PRIMARY KEY,
+    nome VARCHAR(200) NOT NULL,
+    tipo_estabelecimento VARCHAR(50) CHECK (tipo_estabelecimento IN ('Restaurante', 'Hotel')),
+    id_localizacao INT NOT NULL REFERENCES localizacao(id_localizacao) ON DELETE CASCADE,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ================================================
+-- TABELA: colaborador_estabelecimento
+-- Relação N:N entre colaboradores e estabelecimentos
+-- ================================================
+CREATE TABLE colaborador_estabelecimento (
+    id_colaborador INT REFERENCES colaborador(id_colaborador) ON DELETE CASCADE,
+    id_estabelecimento INT REFERENCES estabelecimento(id_estabelecimento) ON DELETE CASCADE,
+    funcao VARCHAR(100),
+    data_inicio DATE,
+    PRIMARY KEY (id_colaborador, id_estabelecimento)
+);
+
+-- ================================================
+-- ÍNDICES E OTIMIZAÇÃO
+-- ================================================
+CREATE INDEX idx_estabelecimento_tipo ON estabelecimento (tipo_estabelecimento);
+CREATE INDEX idx_localizacao_cidade ON localizacao (cidade);
+CREATE INDEX idx_colaborador_nome ON colaborador (nome);
